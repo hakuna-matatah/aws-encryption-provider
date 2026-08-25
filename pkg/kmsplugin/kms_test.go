@@ -104,6 +104,11 @@ func TestParseError(t *testing.T) {
 			expected: KMSErrorTypeUserInduced,
 		},
 		{
+			name:     "AccessDeniedException caused by inactive resource owner account",
+			err:      &mockAPIError{code: "AccessDeniedException", message: "User dummy is not authorized to perform: kms:Decrypt on this resource because the resource owner's account is not active"},
+			expected: KMSErrorTypeUserInduced,
+		},
+		{
 			name:     "Other AccessDeniedException",
 			err:      &mockAPIError{code: "AccessDeniedException", message: "access denied for some other reason"},
 			expected: KMSErrorTypeOther,
